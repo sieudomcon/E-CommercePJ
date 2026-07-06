@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=E-CommerceApiDb;encrypt=true;trustServerCertificate=true;
+    username: DuyDepTrai
+    password: goitaolabo1234
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+
