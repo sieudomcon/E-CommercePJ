@@ -1,12 +1,49 @@
-package com.evstation.ecommerceapi.ProductVariant;
+package com.evstation.ecommerceapi.Product;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "product_variants")
 public class ProductVariant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Product ID is required")
+    @Column(nullable = false)
     private String productId;
+
+    @NotBlank(message = "Variant name is required")
+    @Size(max = 255, message = "Variant name must not exceed 255 characters")
+    @Column(nullable = false, length = 255)
     private String name;
+
+    @NotNull(message = "Price is required")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @NotNull(message = "Stock is required")
+    @PositiveOrZero(message = "Stock must be greater than or equal to 0")
+    @Column(nullable = false)
     private Integer stock;
-    private Boolean isActive;
+
+    @Column(nullable = false)
+    private boolean isActive = true;
 }

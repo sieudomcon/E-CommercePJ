@@ -1,4 +1,4 @@
-package com.evstation.ecommerceapi.Address;
+package com.evstation.ecommerceapi.Order;
 
 public class AddressSnapshot {
     private String recipientName;
