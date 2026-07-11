@@ -1,11 +1,16 @@
 package com.evstation.ecommerceapi.Cart;
 
+import com.evstation.ecommerceapi.User.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,7 +24,11 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "User ID is required")
-    @Column(nullable = false, unique = true)
-    private String userId;
+    @NotNull(message = "User ID is required")
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "cart")
+    Set<CartItem> cartItems = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package com.evstation.ecommerceapi.Cart;
 
+import com.evstation.ecommerceapi.Product.ProductVariant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -25,16 +26,16 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Cart ID is required")
-    @Column(nullable = false)
-    private Long cartId;
-
-    @NotNull(message = "Product variant ID is required")
-    @Column(nullable = false)
-    private Long productVariantId;
-
     @NotNull(message = "Quantity is required")
     @Positive(message = "Quantity must be greater than 0")
     @Column(nullable = false)
     private Integer quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id", nullable = false)
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "product_variant", nullable = false)
+    private ProductVariant productVariant;
 }

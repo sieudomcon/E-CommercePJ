@@ -1,5 +1,6 @@
 package com.evstation.ecommerceapi.Product;
 
+import com.evstation.ecommerceapi.Cart.CartItem;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -12,6 +13,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,9 +28,10 @@ public class ProductVariant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Product ID is required")
-    @Column(nullable = false)
-    private String productId;
+    @NotNull(message = "Product ID is required")
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     @NotBlank(message = "Variant name is required")
     @Size(max = 255, message = "Variant name must not exceed 255 characters")
@@ -46,4 +50,7 @@ public class ProductVariant {
 
     @Column(nullable = false)
     private boolean isActive = true;
+
+    @OneToMany(mappedBy = "productVariant")
+    private Set<CartItem> cartItems = new HashSet<>();
 }

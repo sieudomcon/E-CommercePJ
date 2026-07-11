@@ -25,8 +25,9 @@ public class OrderItem {
     private Long id;
 
     @NotNull(message = "Order ID is required")
-    @Column(nullable = false)
-    private Long orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
     @NotNull(message = "Product variant ID is required")
     @Column(nullable = false)

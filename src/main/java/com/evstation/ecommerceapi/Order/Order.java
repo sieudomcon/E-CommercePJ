@@ -1,6 +1,8 @@
 package com.evstation.ecommerceapi.Order;
 
 
+import com.evstation.ecommerceapi.Payment.Payment;
+import com.evstation.ecommerceapi.User.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +15,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,9 +30,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "User ID is required")
-    @Column(nullable = false)
-    private String userId;
+    @NotNull(message = "User ID is required")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false, columnDefinition = "json")
     private String addressSnapshot;
@@ -46,4 +51,10 @@ public class Order {
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItem> orderItems = new HashSet<>();
+
+    @OneToOne(mappedBy = "order")
+    private Payment payment;
 }

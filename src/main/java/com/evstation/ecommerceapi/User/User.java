@@ -1,5 +1,7 @@
 package com.evstation.ecommerceapi.User;
 
+import com.evstation.ecommerceapi.Cart.Cart;
+import com.evstation.ecommerceapi.Order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,9 +11,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.autoconfigure.data.ConditionalOnRepositoryType;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -52,6 +58,12 @@ public class User {
     @Column(nullable = false)
     private boolean isActive = true;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Address> address = new HashSet<>();
+
     @OneToOne(mappedBy = "user")
-    private Address address;
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
 }

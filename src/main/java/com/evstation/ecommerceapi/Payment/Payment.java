@@ -1,5 +1,6 @@
 package com.evstation.ecommerceapi.Payment;
 
+import com.evstation.ecommerceapi.Order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,9 @@ public class Payment {
     private String id;
 
     @NotNull(message = "Order ID is required")
-    @Column(nullable = false, unique = true)
-    private Long orderId;
+    @OneToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
     @NotNull(message = "Payment method is required")
     @Enumerated(EnumType.STRING)
