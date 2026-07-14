@@ -23,7 +23,7 @@ public class Payment {
     private String id;
 
     @NotNull(message = "Order ID is required")
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 

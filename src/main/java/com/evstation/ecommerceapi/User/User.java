@@ -11,9 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.boot.autoconfigure.data.ConditionalOnRepositoryType;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -61,7 +59,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Address> address = new HashSet<>();
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Cart cart;
 
     @OneToMany(mappedBy = "user")

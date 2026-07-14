@@ -5,7 +5,6 @@ import com.evstation.ecommerceapi.Payment.Payment;
 import com.evstation.ecommerceapi.User.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,13 +30,14 @@ public class Order {
     private Long id;
 
     @NotNull(message = "User ID is required")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false, columnDefinition = "json")
+    @Column(nullable = false, columnDefinition = "NVARCHAR(MAX)")
     private String addressSnapshot;
 
+    @NotNull(message = "Status is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status;
@@ -55,6 +55,6 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "order", fetch = FetchType.LAZY)
     private Payment payment;
 }

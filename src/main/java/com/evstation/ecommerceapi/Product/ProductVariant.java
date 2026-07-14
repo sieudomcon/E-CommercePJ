@@ -29,7 +29,7 @@ public class ProductVariant {
     private Long id;
 
     @NotNull(message = "Product ID is required")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
@@ -50,6 +50,9 @@ public class ProductVariant {
 
     @Column(nullable = false)
     private boolean isActive = true;
+
+    @Version
+    private Long version;
 
     @OneToMany(mappedBy = "productVariant")
     private Set<CartItem> cartItems = new HashSet<>();

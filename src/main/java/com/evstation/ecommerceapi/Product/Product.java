@@ -25,7 +25,7 @@ public class Product {
     private String id;
 
     @NotNull(message = "Category is required")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 

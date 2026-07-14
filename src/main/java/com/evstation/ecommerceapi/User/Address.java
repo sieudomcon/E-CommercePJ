@@ -23,7 +23,7 @@ public class Address {
     private Long id;
 
     @NotNull(message = "User ID is required")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

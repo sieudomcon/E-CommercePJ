@@ -25,7 +25,7 @@ public class Cart {
     private Long id;
 
     @NotNull(message = "User ID is required")
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

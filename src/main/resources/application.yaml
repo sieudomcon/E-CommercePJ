@@ -6,8 +6,8 @@ spring:
     name: demo
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=E-CommerceApiDb;encrypt=true;trustServerCertificate=true;
-    username: DuyDepTrai
-    password: goitaolabo1234
+    username: ${DB_USERNAME:DuyDepTrai}
+    password: ${DB_PASSWORD:goitaolabo1234}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     hibernate:
