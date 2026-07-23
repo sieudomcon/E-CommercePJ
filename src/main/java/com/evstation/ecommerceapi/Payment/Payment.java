@@ -24,7 +24,7 @@ public class Payment {
 
     @NotNull(message = "Order ID is required")
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id", nullable = false, unique = true)
     private Order order;
 
     @NotNull(message = "Payment method is required")

@@ -2,7 +2,7 @@ package com.evstation.ecommerceapi.Order;
 
 
 import com.evstation.ecommerceapi.Payment.Payment;
-import com.evstation.ecommerceapi.User.User;
+import com.evstation.ecommerceapi.User.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;

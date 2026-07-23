@@ -1,4 +1,4 @@
-package com.evstation.ecommerceapi.User;
+package com.evstation.ecommerceapi.User.entity;
 
 
 import jakarta.persistence.*;

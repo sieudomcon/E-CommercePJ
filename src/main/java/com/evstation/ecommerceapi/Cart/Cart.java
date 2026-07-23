@@ -1,8 +1,7 @@
 package com.evstation.ecommerceapi.Cart;
 
-import com.evstation.ecommerceapi.User.User;
+import com.evstation.ecommerceapi.User.entity.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +25,7 @@ public class Cart {
 
     @NotNull(message = "User ID is required")
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     @OneToMany(mappedBy = "cart")
